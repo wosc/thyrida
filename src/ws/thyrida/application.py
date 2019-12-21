@@ -67,6 +67,7 @@ class Application(object):
         c = self.config
 
         c.add_route('home', '/')
+        c.add_route('change_password', '/password')
 
         c.scan(package=ws.thyrida, ignore=self.DONT_SCAN)
 

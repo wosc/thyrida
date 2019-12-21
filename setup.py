@@ -15,6 +15,7 @@ setup(
         'setuptools',
         'sqlalchemy',
         'transaction',
+        'wtforms',
         'zope.component',
         'zope.interface',
         'zope.sqlalchemy',
@@ -22,6 +23,7 @@ setup(
 
     extras_require={'test': [
         'pytest',
+        'webtest',
     ]},
 
     entry_points={
