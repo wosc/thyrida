@@ -1,0 +1,7 @@
+CHANGES
+=======
+
+2.0.0 (unreleased)
+------------------
+
+- Rewrite in Python instead of Ruby on Rails.
