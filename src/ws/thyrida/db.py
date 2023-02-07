@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer
 from sqlalchemy.sql import text as sql
 import pkg_resources
 import sqlalchemy
-import sqlalchemy.ext.declarative
 import sqlalchemy.orm
 import transaction
 import ws.thyrida.interfaces
@@ -14,9 +13,9 @@ import zope.sqlalchemy
 class Database(object):
 
     def __init__(self, dsn, testing=False):
-        self.engine = sqlalchemy.create_engine(dsn)
+        self.engine = sqlalchemy.create_engine(dsn, future=True)
         self.session_factory = sqlalchemy.orm.scoped_session(
-            sqlalchemy.orm.sessionmaker(bind=self.engine))
+            sqlalchemy.orm.sessionmaker(bind=self.engine, future=True))
         zope.sqlalchemy.register(self.session_factory, keep_session=testing)
 
     def initialize_database(self):  # mostly for tests
@@ -65,7 +64,7 @@ class ObjectBase(object):
 
     @classmethod
     def find_by_id(cls, id):
-        return cls.db().query(cls).get(id)
+        return cls.db().session.get(cls, id)
 
     @classmethod
     def find_by_sql(cls, text, **params):
@@ -74,8 +73,7 @@ class ObjectBase(object):
             params=params).fetchall()
 
 
-DeclarativeBase = sqlalchemy.ext.declarative.declarative_base(
-    cls=ObjectBase)
+DeclarativeBase = sqlalchemy.orm.declarative_base(cls=ObjectBase)
 
 
 class Object(DeclarativeBase):

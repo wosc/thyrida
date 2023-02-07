@@ -13,7 +13,7 @@ setup(
         'pyramid_jinja2',
         'pyramid_tm',
         'setuptools',
-        'sqlalchemy',
+        'sqlalchemy >= 2.0.0',
         'transaction',
         'wtforms',
         'zope.component',
