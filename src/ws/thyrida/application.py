@@ -1,5 +1,5 @@
 from pyramid.view import view_config
-import pkg_resources
+import importlib.metadata
 import pyramid.config
 import pyramid.paster
 import pyramid.registry
@@ -24,8 +24,8 @@ class Application(object):
     def configure_pyramid(self, settings):
         self.settings = Settings()
         self.settings.update(settings)
-        self.settings['version'] = pkg_resources.get_distribution(
-            'ws.thyrida').version
+        self.settings['version'] = importlib.metadata.version(
+            'ws.thyrida')
         zope.component.provideUtility(
             self.settings, ws.thyrida.interfaces.ISettings)
 

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer
 from sqlalchemy.sql import text as sql
-import pkg_resources
+import importlib.resources
 import sqlalchemy
 import sqlalchemy.orm
 import transaction
@@ -28,8 +28,9 @@ class Database(object):
         else:
             raise ValueError(
                 'Database already exists, refusing to initialize again.')
-        schema = pkg_resources.resource_string(
-            __name__, 'tests/schema.sql').decode('utf-8')
+
+        schema = importlib.resources.files(__package__).joinpath(
+            'tests/schema.sql').read_text()
         for item in schema.split(';'):
             self.session.execute(sql(item))
 

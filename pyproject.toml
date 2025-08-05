@@ -7,7 +7,6 @@ dependencies = [
     'pyramid',
     'pyramid_jinja2',
     'pyramid_tm',
-    'setuptools',
     'sqlalchemy >= 2.0.0',
     'transaction',
     'wtforms',
