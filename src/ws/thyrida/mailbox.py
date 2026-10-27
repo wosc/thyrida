@@ -1,10 +1,9 @@
+from passlib.hash import sha512_crypt
 from pyramid.view import view_config
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, EqualTo
-import crypt
-import hmac
 import sqlalchemy.exc
 import ws.thyrida.db
 import wtforms
@@ -49,11 +48,10 @@ class Mailbox(ws.thyrida.db.Object):
         return cls.db().query(cls).filter_by(login=login).one()
 
     def authenticate(self, entered_password):
-        return hmac.compare_digest(
-            crypt.crypt(entered_password, self.password), self.password)
+        return sha512_crypt.verify(entered_password, self.password)
 
     def set_password(self, password):
-        self.password = crypt.crypt(password, crypt.METHOD_SHA512)
+        self.password = sha512_crypt.hash(password)
 
 
 @view_config(

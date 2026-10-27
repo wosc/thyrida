@@ -4,6 +4,7 @@ description = "Mailbox configuration UI"
 version = "2.0.0"
 
 dependencies = [
+    'passlib',
     'pyramid',
     'pyramid_jinja2',
     'pyramid_tm',
