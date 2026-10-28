@@ -7,7 +7,7 @@ def test_orm_setup_works(db):
     db.session.add(domain)
     mailbox = Mailbox(
         domain=domain, local_part='test',
-        login='test', password='secret', action='none', mailbox_path='none')
+        login='test', password='secret', action='none')
     db.session.add(mailbox)
     transaction.commit()
     db.session.close()
@@ -21,7 +21,7 @@ def test_change_password_sucessfully(db, httpclient):
     db.session.add(domain)
     mailbox = Mailbox(
         domain=domain, local_part='test',
-        login='test@example.com', action='none', mailbox_path='none')
+        login='test@example.com', action='none')
     mailbox.set_password('secret')
     db.session.add(mailbox)
     transaction.commit()

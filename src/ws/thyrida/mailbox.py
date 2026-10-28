@@ -38,10 +38,6 @@ class Mailbox(ws.thyrida.db.Object):
     vacation_body = Column(Text)
 
     action = Column(String(255))
-    mailbox_path = Column(String(255))
-
-    uid = Column(Integer, server_default='1')
-    gid = Column(Integer, server_default='1')
 
     @classmethod
     def find_by_login(cls, login):

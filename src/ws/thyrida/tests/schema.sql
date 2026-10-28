@@ -30,9 +30,6 @@ CREATE TABLE mailboxes (
   vacation_subject varchar default NULL,
   vacation_body text,
   action varchar NOT NULL,
-  mailbox_path varchar NOT NULL,
-  uid integer NOT NULL default '105',
-  gid integer NOT NULL default '8'
 );
 
 CREATE TABLE users (
